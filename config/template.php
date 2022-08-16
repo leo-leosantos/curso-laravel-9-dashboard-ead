@@ -4,17 +4,17 @@ return [
     'menus' => [
         [
             'name' => 'Home',
-            'url' => '/admin',
+            'url' => env('APP_URL') . 'admin',
             'icon' => 'fas fa-tachometer-alt'
         ],
         [
-            'name' => 'Listagem',
-            'url' => '/admin/listagem',
-            'icon' => 'fas fa-align-left'
+            'name' => 'Usuários',
+            'url' =>  env('APP_URL') .'admin/users',
+            'icon' => 'fas fa-users'
         ],
         [
             'name' => 'Formulários CSS',
-            'url' => '/admin/tabelas',
+            'url' => env('APP_URL') .'admin/tabelas',
             'icon' => 'fas fa-table'
         ],
 

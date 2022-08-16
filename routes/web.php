@@ -18,9 +18,12 @@ use App\Http\Controllers\Admin\{UserController};
 
 Route::prefix('admin')->group(function(){
 
-    Route::get('/users', [UserController::class,'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class,'create'])->name('admin.create');
+    Route::post('/users', [UserController::class,'store'])->name('admin.store');
 
+    Route::get('/users', [UserController::class,'index'])->name('users.index');
     Route::get('/', [AdminController::class,'index'])->name('admin.home');
+
 });
 Route::get('/', function () {
     return view('welcome');

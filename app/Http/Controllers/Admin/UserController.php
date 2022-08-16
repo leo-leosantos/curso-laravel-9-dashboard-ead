@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUser;
 
 class UserController extends Controller
 {
@@ -30,13 +31,15 @@ class UserController extends Controller
 
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
 
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
-        //
+
+         $this->service->create($request->validated());
+        return redirect()->route('users.index');
     }
 
     /**
