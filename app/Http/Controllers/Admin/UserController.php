@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = $this->service->getAll(
-             $request->get('filter','')
+            $request->get('filter', '')
         );
 
         //dd($users);
@@ -38,7 +39,10 @@ class UserController extends Controller
     public function store(StoreUser $request)
     {
 
-         $this->service->create($request->validated());
+        $data = $request->validated();
+        $data['password'] = bcrypt($data['password']);
+
+        $this->service->create($data);
         return redirect()->route('users.index');
     }
 
@@ -61,19 +65,24 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!$user = $this->service->findById($id)) {
+            return redirect()->back();
+        }
+
+        return view('admin.users.edit', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(UpdateUser $request, $id)
     {
-        //
+
+        $data = $request->only(['name', 'email']);
+        if ($request->password) $data['password'] = bcrypt($data['password']);
+        if (!$this->service->update($id, $data)) {
+            return back();
+        }
+
+        return redirect()->route('users.index');
     }
 
     /**
