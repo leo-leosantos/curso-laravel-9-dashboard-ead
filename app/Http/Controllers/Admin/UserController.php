@@ -54,7 +54,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        if (!$user = $this->service->findById($id)) {
+            return back();
+        }
+
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -76,8 +80,13 @@ class UserController extends Controller
     public function update(UpdateUser $request, $id)
     {
 
+
         $data = $request->only(['name', 'email']);
-        if ($request->password) $data['password'] = bcrypt($data['password']);
+
+
+        if ($request->password)
+            $data['password'] = bcrypt($request->password);
+
         if (!$this->service->update($id, $data)) {
             return back();
         }
@@ -85,14 +94,25 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        //
+        $this->service->delete($id);
+        return redirect()->route('users.index');
+    }
+
+
+    public function changeImage(Request $request, $id)
+    {
+        if (!$user = $this->service->findById($id)) {
+            return back();
+        }
+        return view('admin.users.change-image', compact('user'));
+
+    }
+    public function uploadFile(Request $request)
+    {
+
+        dd($request->image);
     }
 }
