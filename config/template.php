@@ -13,9 +13,9 @@ return [
             'icon' => 'fas fa-users'
         ],
         [
-            'name' => 'Formulários CSS',
-            'url' => env('APP_URL') .'admin/tabelas',
-            'icon' => 'fas fa-table'
+            'name' => 'Admins',
+            'url' => env('APP_URL') .'admin/admins',
+            'icon' => 'fas fa-robot'
         ],
 
 

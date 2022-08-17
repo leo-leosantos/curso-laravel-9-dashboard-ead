@@ -18,6 +18,21 @@ use App\Http\Controllers\Admin\{UserController};
 
 Route::prefix('admin')->group(function(){
 
+
+    /**
+     * Routes Admins
+     */
+    Route::get('admins/{id}/image', [AdminController::class, 'changeImage'])->name('admins.change.image');
+    Route::put('/admins/{id}/update->image', [AdminController::class,'uploadFile'])->name('admins.update.image');
+    Route::resource('admins',AdminController::class);
+
+    Route::get('/', [DashboardController::class,'index'])->name('admin.dashboard');
+
+
+
+    /**
+     * Routes Users
+     */
     Route::get('users/{id}/image', [UserController::class, 'changeImage'])->name('users.change.image');
     Route::put('/users/{id}/update->image', [UserController::class,'uploadFile'])->name('users.update.image');
     Route::delete('/users/{id}', [UserController::class,'destroy'])->name('users.destroy');
@@ -27,8 +42,6 @@ Route::prefix('admin')->group(function(){
     Route::get('/users/create', [UserController::class,'create'])->name('users.create');
     Route::get('/users/{id}', [UserController::class,'show'])->name('users.show');
     Route::get('/users', [UserController::class,'index'])->name('users.index');
-
-    Route::get('/', [AdminController::class,'index'])->name('admin.home');
 
 });
 Route::get('/', function () {

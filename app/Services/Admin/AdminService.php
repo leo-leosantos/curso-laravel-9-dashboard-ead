@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Admin;
 
-use App\Repositories\UserRepositoryInterface;
+use App\Repositories\AdminRepositoryInterface;
 
-class UserService
+class AdminService
 {
     private $repository;
-    public function __construct(UserRepositoryInterface $repository)
+    public function __construct(AdminRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -17,9 +17,9 @@ class UserService
     public function getAll(string $filter = ''): array
     {
 
-        $users = $this->repository->getAll($filter);
+        $admins = $this->repository->getAll($filter);
 
-        return convertItemsOfArrayToObject($users) ;
+        return convertItemsOfArrayToObject($admins) ;
     }
     public function findById(string $id): object
     {
