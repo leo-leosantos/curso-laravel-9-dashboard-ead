@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreImage;
 use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
+use App\Services\UploadFile;
 
 class UserController extends Controller
 {
@@ -21,7 +23,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = $this->service->getAll(
-            $request->get('filter', '')
+            $request->filter ?? ""
         );
 
         //dd($users);
@@ -108,11 +110,15 @@ class UserController extends Controller
             return back();
         }
         return view('admin.users.change-image', compact('user'));
-
     }
-    public function uploadFile(Request $request)
+    public function uploadFile(StoreImage $request, $id, UploadFile $uploadFile)
     {
 
-        dd($request->image);
+        $path =    $uploadFile->store($request->image, 'users', $id);
+
+        if (!$this->service->update($id, ['image' => $path])) {
+            return back();
+        }
+        return redirect()->route('users.index');
     }
 }

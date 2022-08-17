@@ -12,8 +12,9 @@
             <div class="leading-loose">
                 <form action="{{ route('users.update.image', $user->id) }}" class="p-10 bg-white rounded shadow-xl" method="POST" enctype="multipart/form-data">
                     @method('PUT')
-
                     @csrf
+                    @include('admin.includes.alerts')
+
                     <div class="">
                         <label class="block text-sm text-gray-600" for="image">Foto Perfil</label>
                         <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="file" name="image" type="file">
