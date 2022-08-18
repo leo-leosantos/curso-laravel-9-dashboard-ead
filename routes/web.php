@@ -1,8 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\{
+
+    AdminController,
+    UserController,
+    DashboardController,
+    CourseController
+};
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\{AdminController};
-use App\Http\Controllers\Admin\{UserController};
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +24,10 @@ use App\Http\Controllers\Admin\{UserController};
 
 Route::prefix('admin')->group(function(){
 
+    /**
+     *  Routes courses
+     */
+    Route::resource('/courses',CourseController::class);
 
     /**
      * Routes Admins

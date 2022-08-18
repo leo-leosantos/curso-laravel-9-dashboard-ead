@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Storage;
 
 class UploadFile
 {
-    public function store(UploadedFile $file, string $path, $id)
+    public function store(UploadedFile $file, string $path, $identificadorpasta)
     {
 
-        return $file->store( $path . '/'. $id);
+        return $file->store( $path . '/'. $identificadorpasta);
     }
 
     public function storeAs(UploadedFile $file, string $path, string $customName)

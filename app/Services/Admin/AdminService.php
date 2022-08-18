@@ -19,7 +19,7 @@ class AdminService
 
         $admins = $this->repository->getAll($filter);
 
-        return convertItemsOfArrayToObject($admins) ;
+        return convertItemsOfArrayToObject($admins);
     }
     public function findById(string $id): object
     {

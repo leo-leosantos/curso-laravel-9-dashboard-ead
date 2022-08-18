@@ -15,7 +15,7 @@
                     @csrf
                     @include('admin.includes.alerts')
 
-                    <div class="">
+                    <div class="mt2">
                         <label class="block text-sm text-gray-600" for="image">Foto Perfil</label>
                         <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="file" name="image" type="file">
                     </div>

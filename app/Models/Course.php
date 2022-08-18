@@ -15,4 +15,9 @@ class Course extends Model
     {
         return $this->hasMany(Module::class);
     }
+
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'id'=> 'string'
+    ];
 }

@@ -17,7 +17,11 @@ return [
             'url' => env('APP_URL') .'admin/admins',
             'icon' => 'fas fa-robot'
         ],
-
+        [
+            'name' => 'Cursos',
+            'url' => env('APP_URL') .'admin/courses',
+            'icon' => 'fas fa-video'
+        ],
 
     ]
 ];
