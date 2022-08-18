@@ -20,4 +20,7 @@ class Course extends Model
         'created_at' => 'datetime:d-m-Y',
         'id'=> 'string'
     ];
+
+    public $incrementing = false;
+
 }

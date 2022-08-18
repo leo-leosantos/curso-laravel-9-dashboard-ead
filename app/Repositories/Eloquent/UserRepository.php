@@ -26,7 +26,7 @@ class UserRepository implements UserRepositoryInterface
 
         return $users->toArray();
     }
-    public function findById(string $id) : object
+    public function findById(string $id): ?object
     {
         if ($id) {
             return $this->model->find($id);

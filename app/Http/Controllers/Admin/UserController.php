@@ -41,7 +41,6 @@ class UserController extends Controller
     public function store(StoreUser $request)
     {
 
-       // dd($request->all());
 
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
@@ -113,6 +112,7 @@ class UserController extends Controller
         }
         return view('admin.users.change-image', compact('user'));
     }
+
     public function uploadFile(StoreImage $request, $id, UploadFile $uploadFile)
     {
 

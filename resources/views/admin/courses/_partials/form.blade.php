@@ -2,13 +2,13 @@
 @csrf
 <div class="">
     <label class="block text-sm text-gray-600" for="name">Nome*</label>
-    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text" required
-        placeholder="Seu Nome" aria-label="Name" value="{{ $user->name ??  old('name') }}">
+    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text"
+        placeholder="Seu Nome" aria-label="Name" value="{{ $course->name ??  old('name') }}">
 </div>
 
 <div class="py-2">
     <label class="block text-sm text-gray-600" for="available">
-    <input name="available" type="checkbox"  aria-label="available" name="available" value="1"  >
+    <input name="available" type="checkbox"  aria-label="available" name="available" value="1"  {{  ($course->available == 1 ? ' checked' : '') }} >
     Status*
 </label>
 </div>

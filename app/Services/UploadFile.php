@@ -10,6 +10,7 @@ class UploadFile
     public function store(UploadedFile $file, string $path, $identificadorpasta)
     {
 
+
         return $file->store( $path . '/'. $identificadorpasta);
     }
 
