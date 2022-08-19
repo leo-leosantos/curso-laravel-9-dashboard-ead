@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreImage;
 use App\Http\Controllers\Controller;
 use App\Services\Admin\CourseService;
-use App\Http\Requests\Course\StoreCourse;
+use App\Http\Requests\Course\StoreUpdateCourse;
 use Illuminate\Support\Facades\Redis;
 
 class CourseController extends Controller
@@ -47,19 +47,20 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCourse $request, UploadFile $uploadFile)
+    public function store(StoreUpdateCourse $request, UploadFile $uploadFile)
     {
-        $data = $request->only(['name']);
-        $data['available'] = isset( $request->available);
+
+
+        $data = $request->only(['name',  'description']);
+        $data['available'] = isset($request->available);
 
         $pastaNomeCurso = Str::slug($data['name'], '-');
 
-        if($request->image)
-        {
-           $data['image']  =  $uploadFile->store($request->image,'courses', $pastaNomeCurso);
+        if ($request->image) {
+            $data['image']  =  $uploadFile->store($request->image, 'courses', $pastaNomeCurso);
         }
 
-         $this->service->create($data);
+        $this->service->create($data);
 
         return redirect()->route('courses.index');
     }
@@ -72,7 +73,12 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        if (!$course = $this->service->findById($id)) {
+            return  redirect()->back();
+        }
+
+
+        return view('admin.courses.show', compact('course'));
     }
 
     /**
@@ -84,9 +90,9 @@ class CourseController extends Controller
     public function edit($id)
     {
 
-       if(!$course = $this->service->findById($id)){
+        if (!$course = $this->service->findById($id)) {
             return  redirect()->back();
-       }
+        }
 
 
         return view('admin.courses.edit', compact('course'));
@@ -99,24 +105,24 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id , UploadFile $uploadFile)
+    public function update(StoreUpdateCourse $request, $id, UploadFile $uploadFile)
     {
 
-        $data = $request->only(['name']);
-        $data['available'] = isset( $request->available);
+
+        $data = $request->only(['name',  'description']);
+        $data['available'] = isset($request->available);
 
         $pastaNomeCurso = Str::slug($data['name'], '-');
 
-        if($request->image)
-        {
+        if ($request->image) {
             //remover imagem antiga
             $course = $this->service->findById($id);
-            if($course && $course->image){
+            if ($course && $course->image) {
                 $uploadFile->removeFile($course->image);
             }
 
             //upload da nova Imagem
-           $data['image']  =  $uploadFile->store($request->image,'courses', $pastaNomeCurso);
+            $data['image']  =  $uploadFile->store($request->image, 'courses', $pastaNomeCurso);
         }
 
 
@@ -134,6 +140,13 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
+        if (!$this->service->delete($id)) {
+            return back();
+        }
+
+
+        return redirect()->route('courses.index');
     }
 }

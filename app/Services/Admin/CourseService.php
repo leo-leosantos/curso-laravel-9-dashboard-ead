@@ -43,4 +43,8 @@ class CourseService
         return null;
     }
 
+    public function delete(string $id): bool
+    {
+        return $this->repository->delete($id);
+    }
 }

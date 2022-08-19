@@ -10,10 +10,9 @@
             <i class="fas fa-list mr-3"></i> Formulário de Cadastro Curso
         </p>
         <div class="leading-loose">
-            <form action="{{ route('courses.store') }}" class="p-10 bg-white rounded shadow-xl" method="POST" enctype="multipart/form-data">
 
                     @include('admin.courses._partials.form')
-            </form>
+
         </div>
     </div>
 </div>

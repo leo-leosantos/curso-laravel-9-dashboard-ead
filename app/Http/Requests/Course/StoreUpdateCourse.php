@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Course;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCourse extends FormRequest
+class StoreUpdateCourse extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +24,42 @@ class StoreCourse extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'=> ['required','min:3', 'max:255', 'unique:courses'],
+        // pegar pelo segmento da url
+        //admin segmento 1
+        // courses segmento 2
+        // id segmento 3
+        //http://localhost/eadsp/public/admin/courses/2bfd7b86-dc1f-44fa-8621-1c3d34511860
+       // $id = $this->segment(3);
+
+        /**
+         * paramentro da rota
+         * $this->course
+         */
+            $id = $this->course;
+
+        $rules = [
+            'name'=> [
+                'required',
+                'min:3',
+                'max:255',
+                //"unique:courses,name,{$id},id",
+
+                Rule::unique('courses')->ignore($id)
+            ],
             'image'=>['nullable','image','max:1024' ],
             'description'=>['nullable','min:5', 'max:9999'],
             'available'=>['nullable','boolean']
         ];
+
+        //validação difrentes para cadastro e edição , fazendo validação pelo method - put ou post
+        // if($this->method() == 'PUT')
+        // {
+        //     $rules['image'] = [
+        //         'image'=>['nullable','image','max:2048' ],
+
+        //     ];
+        // }
+        return  $rules;
     }
 
 
