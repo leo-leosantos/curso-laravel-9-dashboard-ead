@@ -1,28 +1,24 @@
 @extends('admin.layouts.app')
-@section('title', 'Cursos')
+@section('title', "Módulos do Curso {$course->name}")
 @section('content')
     <h1 class="text-3xl text-black pb-6">
-        Cursos
-        <a href="{{ route('courses.create') }}"
-            class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+        Módulos do Curso {{ $course->name  }}
+        <a href="{{ route('modules.create', $course->id) }}"
+           class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             <i class="fas fa-plus"></i>
         </a>
 
     </h1>
 
     <div class="w-full mt-12">
-        @include('admin.includes.form-search', ['routeName' => 'courses.index'])
+        {{--  @include('admin.includes.form-search', ['routeName' => 'modules.index'])  --}}
         <div class="bg-white overflow-auto">
             <table class="min-w-full leading-normal">
                 <thead>
                     <tr>
                         <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            NOme
-                        </th>
-                        <th
-                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Status
+                            Nome
                         </th>
                         <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -36,35 +32,26 @@
                 </thead>
                 <tbody>
 
-                    @forelse ($courses as $course)
+                    @forelse ($modules as $module)
                         <tr>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 w-10 h-10">
 
-                                        @if ($course->image)
-                                            <img class="w-full h-full rounded-full"
-                                                src="{{ url("storage/$course->image") }}" alt="{{ $course->name }}" />
-                                        @endif
-
-                                    </div>
                                     <div class="ml-3">
                                         <p class="text-gray-900 whitespace-no-wrap">
-                                            {{ $course->name }}
+                                            {{ $module->name }}
                                         </p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">{{ $course->available ? 'Publicado'  : 'Não Publicado' }}</p>
-                            </td>
+
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-no-wrap">
-                                    {{ $course->created_at }}
+                                    {{ $module->created_at }}
                                 </p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <a href="{{ route('courses.show', $course->id) }}">
+                                <a href="{{ route('modules.show',[ $course->id, $module->id]) }}">
                                     <span
                                         class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden
@@ -72,7 +59,7 @@
                                         <span class="relative">Detalhes</span>
                                     </span>
                                 </a>
-                                <a href="{{ route('courses.edit', $course->id) }}">
+                                <a href="{{ route('modules.edit', [ $course->id, $module->id]) }}">
                                     <span
                                         class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden
@@ -86,7 +73,7 @@
                                         class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden
                                             class="absolute inset-0 bg-blue-200 opacity-50 rounded-full"></span>
-                                        <span class="relative">Modulos do Curso</span>
+                                        <span class="relative">Aulas</span>
                                     </span>
                                 </a>
                             </td>

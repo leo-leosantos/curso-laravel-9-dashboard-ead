@@ -2,13 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Module extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+
+    //UuidTrait;
+
+
+    protected $fillable = ['course_id', 'name'];
+
+
+    // public static function booted()
+    // {
+    //     static::created(function (Model $model) {
+    //         $model->id = Str::uuid();
+    //     });
+    // }
+
 
     public function course()
     {
@@ -18,4 +32,13 @@ class Module extends Model
     {
         return $this->hasMany(Lesson::class);
     }
+
+
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'id'=> 'string'
+    ];
+
+    public $incrementing = false;
+
 }
