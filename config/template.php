@@ -22,6 +22,11 @@ return [
             'url' => env('APP_URL') .'admin/courses',
             'icon' => 'fas fa-video'
         ],
+        [
+            'name' => 'Dúvidas',
+            'url' => env('APP_URL') .'admin/supports',
+            'icon' => 'fas fa-question-circle'
+        ],
 
     ]
 ];

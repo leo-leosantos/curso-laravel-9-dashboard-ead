@@ -15,7 +15,12 @@ class Module extends Model
 
     protected $fillable = ['course_id', 'name'];
 
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'id'=> 'string'
+    ];
 
+    public $incrementing = false;
     // public static function booted()
     // {
     //     static::created(function (Model $model) {
@@ -34,11 +39,6 @@ class Module extends Model
     }
 
 
-    protected $casts = [
-        'created_at' => 'datetime:d-m-Y',
-        'id'=> 'string'
-    ];
 
-    public $incrementing = false;
 
 }
