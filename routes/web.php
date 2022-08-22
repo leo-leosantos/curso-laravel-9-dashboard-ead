@@ -7,10 +7,13 @@ use App\Http\Controllers\Admin\{
     DashboardController,
     CourseController,
     ModuleController,
-    LessonController
+    LessonController,
+    SupportController
 };
 
 use Illuminate\Support\Facades\Route;
+use Mockery\Matcher\Subset;
+use Psy\Sudo;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin')->group(function(){
+
+
+    /***
+     *
+     * Supports
+     */
+        Route::get('/supports',[SupportController::class,'index'])->name('support.index');
 
       /***
      *
