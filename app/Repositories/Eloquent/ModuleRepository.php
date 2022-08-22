@@ -20,7 +20,6 @@ class ModuleRepository implements ModuleRepositoryInterface
         $modules = $this->model
             ->where(function ($query) use ($filter) {
                 if ($filter) {
-                    $query->where('email', $filter);
                     $query->orWhere('name', 'LIKE', "%{$filter}%");
                 }
             })
@@ -48,12 +47,13 @@ class ModuleRepository implements ModuleRepositoryInterface
     public function update(string $id, array $data): object
     {
 
-        if (!$modules = $this->findById($id)) {
+        if (!$itemDb = $this->findById($id)) {
             return null;
         }
-        $modules->update($data);
 
-        return $modules;
+        $itemDb->update($data);
+
+        return $itemDb;
     }
     public function delete(string $id): ?bool
     {

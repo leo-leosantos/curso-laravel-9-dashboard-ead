@@ -1,4 +1,4 @@
-<form action="{{ route($routeName) }}" method="GET">
+<form action="{{ route($routeName, $params ?? '') }}" method="GET">
     <div class="mb-3 xl:w-96">
         <div class="input-group relative flex flex-wrap items-stretch w-full mb-4">
             <input type="search"
