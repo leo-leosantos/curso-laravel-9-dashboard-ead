@@ -26,7 +26,7 @@
     <div class="mt2">
         <label class="block text-sm text-gray-600" for="image">Descrição</label>
             <textarea class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" name="description" cols="30" rows="10" placeholder="Descrição">
-                {{ $course->description }}
+                {{ $course->description ?? old('description') }}
             </textarea>
     </div>
     <div class="mt-6">

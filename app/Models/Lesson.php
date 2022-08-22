@@ -8,11 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'url', 'video', 'description'];
+
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'id'=> 'string'
+    ];
+
+
+    protected $fillable = ['module_id','name', 'url', 'video', 'description'];
 
     public function module()
     {
         return $this->belongsTo(Module::class);
     }
+
+
 
 }

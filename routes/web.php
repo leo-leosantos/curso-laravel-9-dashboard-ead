@@ -6,7 +6,8 @@ use App\Http\Controllers\Admin\{
     UserController,
     DashboardController,
     CourseController,
-    ModuleController
+    ModuleController,
+    LessonController
 };
 
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin')->group(function(){
+
+      /***
+     *
+     * Aulas
+     */
+    Route::resource('/modules/{moduleId}/lessons',LessonController::class);
     /***
      *
      * Modulos
