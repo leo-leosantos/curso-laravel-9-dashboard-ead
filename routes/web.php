@@ -8,7 +8,8 @@ use App\Http\Controllers\Admin\{
     CourseController,
     ModuleController,
     LessonController,
-    SupportController
+    SupportController,
+    ReplySupportController
 };
 
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,11 @@ use Psy\Sudo;
 
 
 Route::prefix('admin')->group(function(){
+    /**
+     * Reply Support
+     */
+
+    Route::post('/supports/{id}/reply',[ReplySupportController::class,'store'])->name('replies.store');
 
 
     /***
