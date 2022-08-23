@@ -16,6 +16,8 @@ class Support extends Model
     ];
 
 
+    //relacionamentos
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -24,5 +26,10 @@ class Support extends Model
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(ReplaySupport::class);
     }
 }
