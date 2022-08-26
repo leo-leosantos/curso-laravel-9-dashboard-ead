@@ -2,10 +2,10 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Support as Model;
-use App\Repositories\ReplyRepositoryInterface;
+use App\Models\ReplaySupport as Model;
+use App\Repositories\ReplySupportRepositoryInterface;
 
-class ReplyRepository implements ReplyRepositoryInterface
+class ReplySupportRepository implements ReplySupportRepositoryInterface
 {
     private $model;
 

@@ -7,14 +7,16 @@ use App\Models\{
     Admin,
     Course,
     Module,
-    Lesson
+    Lesson,
+    ReplaySupport
 };
 use App\Observers\{
     UserObserver,
     AdminObserver,
     CourseObserver,
     ModuleObserver,
-    LessonObserver
+    LessonObserver,
+    ReplySupportObserver
 };
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -46,6 +48,7 @@ class EventServiceProvider extends ServiceProvider
         Course::observe(CourseObserver::class);
         Module::observe(ModuleObserver::class);
         Lesson::observe(LessonObserver::class);
+        ReplaySupport::observe(ReplySupportObserver::class);
 
     }
 }

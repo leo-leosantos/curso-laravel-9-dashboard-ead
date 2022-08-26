@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 
-interface ReplyRepositoryInterface
+interface ReplySupportRepositoryInterface
 {
 
     public function createReplyToSupport(array $data);
