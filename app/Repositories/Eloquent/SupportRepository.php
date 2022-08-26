@@ -29,7 +29,12 @@ class SupportRepository implements SupportRepositoryInterface
         if ($id) {
 
             return $this->model
-            ->with(['user','lesson', 'replies'])
+            ->with([
+                'user',
+                'lesson',
+                'replies.user',
+                'replies.admin'
+                ])
             ->find($id);
         }
         return null;
