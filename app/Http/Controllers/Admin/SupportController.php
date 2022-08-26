@@ -22,7 +22,18 @@ class SupportController extends Controller
     {
         $supports = $this->service->getSupports($request->get('status','P'));
 
-        return view('admin.supports.index', compact('supports') );
+        $statusOptions = ['P'=>'Pendente','A' =>'Aguardando Aluno', 'C'=>'Finalizado'];
+
+
+
+       $statusOptions = (object) $statusOptions;
+        //$statusOptions = json_encode($statusOptions);
+
+        //dd($statusOptions);
+
+        return view('admin.supports.index', compact('supports','statusOptions') );
+
+
     }
 
 
