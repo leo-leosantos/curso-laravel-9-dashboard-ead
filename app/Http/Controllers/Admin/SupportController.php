@@ -20,12 +20,15 @@ class SupportController extends Controller
 
     public function index(Request $request)
     {
-        $supports = $this->service->getSupports($request->get('status','P'));
+        $supports = $this->service->getSupports($request->get('status','P'),$request->get('page',1));
 
+        //dd($supports->items());
         $statusOptions = ['P'=>'Pendente','A' =>'Aguardando Aluno', 'C'=>'Finalizado'];
 
 
+       //  $statusOptions =  convertItemsOfArrayToObject($statusOptions);
 
+        // dd($status);
        $statusOptions = (object) $statusOptions;
         //$statusOptions = json_encode($statusOptions);
 
